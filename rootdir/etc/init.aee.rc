@@ -1,0 +1,29 @@
+on property:ro.build.type=eng
+    write /proc/sys/fs/suid_dumpable 2    
+    write /proc/sys/kernel/core_pattern "|/system/bin/aee_core_forwarder /data/core/ %p %s UID=%u GID=%g"
+
+on property:ro.build.type=userdebug
+    write /proc/sys/fs/suid_dumpable 2    
+    write /proc/sys/kernel/core_pattern "|/system/bin/aee_core_forwarder /data/core/ %p %s UID=%u GID=%g"
+
+#ifdef VENDOR_EDIT//Fanhong.Kong@ProDrv.CHG,modified 2015.12.16 for debug
+on property:debug.MB.running=1
+    setprop persist.aee.core.dump enable
+#endif/*VENDOR_EDIT*/
+
+on property:persist.aee.core.dump=enable
+    write /proc/sys/fs/suid_dumpable 2    
+    write /proc/sys/kernel/core_pattern "|/system/bin/aee_core_forwarder /data/core/ %p %s UID=%u GID=%g"
+	
+#ifdef VENDOR_EDIT//Fanhong.Kong@ProDrv.CHG,modified 2016.04.07,for user open/close mtklog
+on property:debug.MB.running=0
+    setprop persist.aee.core.dump disable
+	
+on property:persist.aee.core.dump=disable
+    write /proc/sys/fs/suid_dumpable 0
+	setprop persist.mtk.aee.mode 4
+#endif/*VENDOR_EDIT*/
+
+on init
+    export LD_PRELOAD libdirect-coredump.so
+    write /proc/self/coredump_filter 39
