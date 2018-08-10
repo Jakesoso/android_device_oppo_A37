@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VENDOR=oppo
-DEVICE=A37m
+DEVICE=A37
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 

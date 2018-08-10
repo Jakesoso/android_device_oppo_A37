@@ -48,6 +48,8 @@ on post-fs-data
    
     chmod 0660 /dev/DW9714AF
     chown system camera /dev/DW9714AF
+	chmod 0660 /dev/DW9800AF
+    chown system camera /dev/DW9800AF
 
     chmod 0660 /dev/LC898122AF
     chown system camera /dev/LC898122AF
@@ -130,13 +132,17 @@ on post-fs-data
 # Encrypt phone function
     setprop vold.post_fs_data_done 1
 
+# yongzhi.zhang modified for MT6755	
+	chmod 0660 /dev/i2c0_tfa9890
+	chown root audio /dev/i2c0_tfa9890
+	
 #ifdef VENDOR_EDIT
-# jie.cheng@swdp.shanghai.performance, 2016/03/29, adjust the rps freq for MT6750
-# reset the rps freq for MT6750
+#Fuchun.Liao@Mobile.BSP.CHG 2016-01-18 add for charger_log
+	chown system root /proc/charger_log
     setprop net.perf.cpu.core 4,4,0,0
     setprop net.perf.cpu.freq 1001000,1001000,0,0
-#endif /*VENDOR_EDIT*/
-
+#endif
+	
 on init
     # Refer to http://source.android.com/devices/tech/storage/index.html
     # It said, "Starting in Android 4.4, multiple external storage devices are surfaced to developers through
@@ -146,16 +152,6 @@ on init
     # Therefore, if the target doesn't support sd hot-plugging (Ex: the SD card slot in a battery compartment), we need to export SECONDARY_STORAGE in 'boot' section
     #
     # export SECONDARY_STORAGE /storage/sdcard1
-
-#ifdef VENDOR_EDIT /* OPPO 2016-01-16 sjc Add for charging */
-on charger
-    start fuelgauged
-   
-service fuelgauged /system/bin/fuelgauged
-    class main
-    user system
-    group system
-#endif /*VENDOR_EDIT*/
 
 service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
     class late_start
@@ -211,7 +207,6 @@ service conn_launcher /system/bin/6620_launcher -p /system/etc/firmware/
    user system
    group system
    class core
-
 on property:service.wcn.coredump.mode=2
 start stp_dump
 
@@ -232,7 +227,8 @@ service spm_script /system/bin/spm_loader
     class core
     oneshot
 
-#ifdef VENDOR_EDIT /* OPPO 2016-01-18 sjc Add for otg_switch */
+#ifdef VENDOR_EDIT
+#Fanhong.Kong@ProDrv.CHG, 2015/3/26, add for 8928 otg
 on property:persist.sys.oppo.otg_support=true
 	write /sys/class/power_supply/usb/otg_switch 1
 	write /sys/class/udc/musb-hdrc/device/idpolling 1
@@ -240,20 +236,8 @@ on property:persist.sys.oppo.otg_support=true
 on property:persist.sys.oppo.otg_support=false
 	write /sys/class/power_supply/usb/otg_switch 0
 	write /sys/class/udc/musb-hdrc/device/idpolling 0
-
+	
 on property:ro.build.type=user
 	write /proc/sys/kernel/printk  "1 4 1 6"
-#endif  /*VENDOR_EDIT*/
-
-#ifdef VENDOR_EDIT
-#fangpan@Swdp.shanghai, 2016/01/20, enable the procmod.ko when boot up
-on property:persist.sys.procmon_enable=1
-    insmod /system/lib/modules/procmon.ko -f
-    chown root system /sys/module/procmon/parameters/cpuload_thresh
-    chown root system /sys/module/procmon/parameters/io_thresh
-    chown root system /sys/module/procmon/parameters/mem_thresh
-    chown root system /sys/module/procmon/parameters/binder_thresh
-    chown root system /sys/module/procmon/parameters/trigger_time
-    chown root system /sys/module/procmon/parameters/enable
-# endif /* VENDOR_EDIT */
+#endif
 

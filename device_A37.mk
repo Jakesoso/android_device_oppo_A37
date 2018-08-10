@@ -3,15 +3,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product-if-exists, vendor/oppo/A37m/A37m-vendor.mk)
+$(call inherit-product-if-exists, vendor/oppo/A37/A37-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/oppo/A37m/overlay
+DEVICE_PACKAGE_OVERLAYS += device/oppo/A37/overlay
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/oppo/A37m/kernel
+	LOCAL_KERNEL := device/oppo/A37/kernel
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -22,6 +22,11 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
 	libxlog
+# Keyboard layout
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
+     $(LOCAL_PATH)/keylayout/ACCDET.kl:system/usr/keylayout/ACCDET.kl \
+     $(LOCAL_PATH)/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf
@@ -186,5 +191,5 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui
 $(call inherit-product, build/target/product/full.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_A37m
-PRODUCT_DEVICE := A37m
+PRODUCT_NAME := full_A37
+PRODUCT_DEVICE := A37

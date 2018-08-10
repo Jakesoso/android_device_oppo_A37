@@ -87,18 +87,6 @@ ro.sys.breathlight.mode=whitelight
 sys.enable.hypnus=1
 #endif
 
-#
-# ADDITIONAL_BUILD_PROPERTIES
-#
-ro.com.android.dateformat=MM-dd-yyyy
-ro.config.alarm_alert=alarm_001.ogg
-ro.config.ringtone=ringtone_001.ogg
-ro.config.notification_sound=notification_001.ogg
-ro.config.ringtone_sim2=ringtone_001.ogg
-ro.config.notification_sim2=notification_001.ogg
-ro.config.calendar_sound=notification_003.ogg
-ro.carrier=unknown
-ro.oppo.theme.version=801
 ro.com.android.mobiledata=true
 persist.radio.mobile.data=1,1
 dalvik.vm.heapgrowthlimit=256m

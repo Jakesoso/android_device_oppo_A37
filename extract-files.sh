@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VENDOR=oppo
-DEVICE=A37m
+DEVICE=A37
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 

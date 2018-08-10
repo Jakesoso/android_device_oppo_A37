@@ -8,10 +8,12 @@
     <path name="headphone_output" value="turnon">
         <kctl name="Audio_Amp_R_Switch" value="On" />
         <kctl name="Audio_Amp_L_Switch" value="On" />
+        <kctl name="Audio_HP_Switch" value="On" />
     </path>
     <path name="headphone_output" value="turnoff">  
+        <kctl name="Audio_HP_Switch" value="Off" />	
         <kctl name="Audio_Amp_R_Switch" value="Off" />
-        <kctl name="Audio_Amp_L_Switch" value="Off" />      
+        <kctl name="Audio_Amp_L_Switch" value="Off" />
     </path>
     <!--receiver output-->    
     <path name="receiver_output" value="turnon">
@@ -31,17 +33,25 @@
     </path>
    <!--speaker output-->
     <path name="speaker_output" value="turnon">
+        <kctl name="Audio_Amp_L_Switch" value="On" />
         <kctl name="Speaker_Amp_Switch" value="On" />
     </path>
     <path name="speaker_output" value="turnoff">
         <kctl name="Speaker_Amp_Switch" value="Off" />
+        <kctl name="Audio_Amp_L_Switch" value="Off" />
     </path> 
     <!--headhpone_speaker output-->    
     <path name="headphoneSpeaker_output" value="turnon">
-        <kctl name="Headset_Speaker_Amp_Switch" value="On" />
+        <kctl name="Audio_Amp_R_Switch" value="On" />
+        <kctl name="Audio_Amp_L_Switch" value="On" />
+        <kctl name="Audio_HP_Switch" value="On" />
+        <kctl name="Speaker_Amp_Switch" value="On" />
     </path>
     <path name="headphoneSpeaker_output" value="turnoff">
-        <kctl name="Headset_Speaker_Amp_Switch" value="Off" />
+        <kctl name="Speaker_Amp_Switch" value="Off" />
+        <kctl name="Audio_HP_Switch" value="Off" />
+        <kctl name="Audio_Amp_L_Switch" value="Off" />
+        <kctl name="Audio_Amp_R_Switch" value="Off" />
     </path>
     <!--external_speaker output-->    
     <path name="ext_speaker_output" value="turnon">

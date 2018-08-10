@@ -870,18 +870,17 @@ on boot
 
 #ifdef VENDOR_EDIT
 #Fanhong.Kong@ProDrv.CHG, 2016/1/19, add for oppocustom 	
-    chmod 664 /proc/oppoCustom/Sensor
-    chown system root /proc/oppoCustom/Sensor
-
-    chmod 664 /proc/oppoCustom/nPlUsbEnumEnabled
-    chown system root /proc/oppoCustom/nPlUsbEnumEnabled
-
-    chmod 664 /proc/oppoCustom/nUsbAutoSwitch
-    chown system root /proc/oppoCustom/nUsbAutoSwitch
-
-    chmod 664 /sys/bus/platform/drivers/gyroscope/cali
-    chown system root /sys/bus/platform/drivers/gyroscope/cali
-
+    chmod 664 /proc/oppoCustom/Sensor 
+    chown system root /proc/oppoCustom/Sensor 
+	
+    chmod 664 /proc/oppoCustom/nPlUsbEnumEnabled 
+    chown system root /proc/oppoCustom/nPlUsbEnumEnabled 
+	
+    chmod 664 /proc/oppoCustom/nUsbAutoSwitch 
+    chown system root /proc/oppoCustom/nUsbAutoSwitch 
+    
+    chmod 664 /sys/bus/platform/drivers/gyroscope/cali 
+    chown system root /sys/bus/platform/drivers/gyroscope/cali 
     chmod 664 /sys/bus/platform/drivers/step_counter/debounce_step_num
     chown system root /sys/bus/platform/drivers/step_counter/debounce_step_num
 #hufeng add for camera flash calibration
@@ -1539,7 +1538,6 @@ service md_monitor /system/bin/md_monitor
     class main
     user system
     group system radio sdcard_rw inet sdcard_r media_rw
-
 #
 #sensor service (begin)
 #
