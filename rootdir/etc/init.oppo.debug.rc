@@ -1,0 +1,61 @@
+##################################################################################
+### VENDOR_EDIT, OPPO All rights reserved.
+### 
+### File: - init.oppo.debug.rc
+### Author: Canjie.Zheng@Swdp.android
+### 
+### ------------------------------- Revision History: ----------------------------
+### <author>                        <data>       <version>   <desc>
+### ------------------------------------------------------------------------------
+### Canjie.Zheng@Swdp.android      2016/08/12               Create this file
+##################################################################################
+
+#ifdef VENDOR_EDIT
+#Canjie.Zheng@Swdp.Android.OppoDebug.JunkLog, 2016/08/04, add for junk log.
+service junklogcat /system/bin/sh /autochmod.sh "junklogcat"
+    class main
+    user root
+    disabled
+    oneshot
+
+service junkdmesg /system/bin/sh /autochmod.sh "junkdmesg"
+    class main
+    user root
+    disabled
+    oneshot
+
+service junkststart /system/bin/sh /autochmod.sh "junkststart"
+    class main
+    user root
+    disabled
+    oneshot
+
+service junkststop /system/bin/sh /autochmod.sh "junkststop"
+    class main
+    user root
+    disabled
+    oneshot
+
+service junklog /system/bin/junklogcollector
+    class main
+    user system
+    group system sdcard_rw sdcard_r
+    seclabel u:r:junklog:s0
+
+#endif /* VENDOR_EDIT */
+
+#ifdef VENDOR_EDIT
+#Canjie.Zheng@Swdp.Android.OppoDebug.JunkLog,2016/07/25,add for junklog
+#start or stop base on the property
+on property:persist.sys.oppo.junklog=true
+    start junklog
+
+on property:persist.sys.oppo.junklog=false
+    start junklog
+#endif VENDOR_EDIT
+
+#ifdef VENDOR_EDIT
+#Haoran.Zhang@Swdp.Android.BuildConfig.BaseConfig, 2016/09/22, add for protect xkit
+on init
+   export XKIT /system/xbin/busybox
+#endif

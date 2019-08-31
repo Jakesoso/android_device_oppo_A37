@@ -1,0 +1,20 @@
+Date: Friday, 10 Aug 2018 15:30:49 +0800
+Subject: [PATCH] Fix log
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Signed-off-by: Jakesoso <1343938313@qq.com>
+
+
+diff --git a/luni/src/main/native/java_lang_System.cpp b/luni/src/main/native/java_lang_System.cpp
+index fa1c1f3..c96582b 100644
+--- a/luni/src/main/native/java_lang_System.cpp
++++ b/luni/src/main/native/java_lang_System.cpp
+@@ -63,7 +63,7 @@ static void System_log(JNIEnv* env, jclass, jchar type, jstring javaMessage, jth
+ }
+ 
+ static void System_closeLogSockets(JNIEnv*, jclass) {
+-  __android_log_close();
++  
+ }
+
